@@ -36,3 +36,7 @@ function getImageUrl(imageIndex, useThumbnailVersion) {
   return "https://farm" + image.farm + 
     ".staticflickr.com/" + image.server + "/" + image.id + "_" + image.secret + "_" + size + ".jpg";
 }
+
+function loadLightbox(index) {
+
+}
