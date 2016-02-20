@@ -1,0 +1,14 @@
+#images .image-container {
+  width: 100px;
+  height: 100px;
+  background-size: cover;
+  margin: 5px;
+  float: left;
+  cursor: pointer;
+  opacity: 0.8;
+}
+
+#images .image-container:hover {
+  opacity: 1.0;
+}
+
