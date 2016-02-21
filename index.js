@@ -14,6 +14,7 @@ callImageApi(flickrUrl);
 function setupEventListeners() {
   prevArrow.addEventListener('click', loadPrevImage, false);
   nextArrow.addEventListener('click', loadNextImage, false);
+  lightboxBackground.addEventListener('click', closeLightbox, false);
 }
 
 function callImageApi(url) {
@@ -56,6 +57,11 @@ function loadLightbox(index) {
 
   prevArrow.style.display = (index > 0) ? "block" : "none";
   nextArrow.style.display = (index < images.length - 1) ? "block" : "none";
+}
+
+function closeLightbox() {
+  lightbox.style.display = "none";
+  lightboxBackground.style.display = "none";
 }
 
 function getImageUrl(imageIndex, useThumbnailVersion) {
