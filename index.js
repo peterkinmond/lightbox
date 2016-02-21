@@ -3,9 +3,11 @@ var flickrUrl = "https://api.flickr.com/services/rest/?method=flickr.photosets.g
   currentImageIndex = 0, // Index of image in lightbox
   imagesDiv = document.getElementById('images'),
   lightbox = document.getElementsByClassName('lightbox')[0],
-  lightboxImage = document.getElementsByClassName('lightbox-image')[0],
+  imageTitle = document.getElementsByClassName('lightbox-title')[0],
   prevArrow = document.getElementsByClassName('prev-arrow')[0],
   nextArrow = document.getElementsByClassName('next-arrow')[0],
+  lightboxExit = document.getElementsByClassName('lightbox-exit')[0],
+  lightboxImage = document.getElementsByClassName('lightbox-image')[0],
   lightboxBackground = document.getElementsByClassName('lightbox-background')[0];
 
 setupEventListeners();
@@ -15,22 +17,20 @@ function setupEventListeners() {
   prevArrow.addEventListener('click', loadPrevImage, false);
   nextArrow.addEventListener('click', loadNextImage, false);
   lightboxBackground.addEventListener('click', closeLightbox, false);
+  lightboxExit.addEventListener('click', closeLightbox, false);
 }
 
 function callImageApi(url) {
   var xhr = new XMLHttpRequest();
-  xhr.addEventListener("load", imageApiCallback, false);
+  xhr.addEventListener("load", displayImages, false);
   xhr.open('GET', url, true);
   xhr.send();
 }
 
-function imageApiCallback() {
+function displayImages() {
   var data = JSON.parse(this.responseText);
   images = data.photoset.photo; // Flickr calls the array of photos "photo"
-  displayImages(images);
-}
 
-function displayImages(images) {
   images.forEach(function(image, index) {
     var imageContainer = document.createElement('div');
     imageContainer.style.backgroundImage = "url(" + getImageUrl(index, true) + ")";
@@ -57,6 +57,7 @@ function loadLightbox(index) {
 
   prevArrow.style.display = (index > 0) ? "block" : "none";
   nextArrow.style.display = (index < images.length - 1) ? "block" : "none";
+  imageTitle.innerHTML = getImageTitle(index);
 }
 
 function closeLightbox() {
@@ -71,4 +72,9 @@ function getImageUrl(imageIndex, useThumbnailVersion) {
   var size = (useThumbnailVersion === true) ? flickrThumbnailId : flickrLargeSizeId;
   return "https://farm" + image.farm + 
     ".staticflickr.com/" + image.server + "/" + image.id + "_" + image.secret + "_" + size + ".jpg";
+}
+
+function getImageTitle(imageIndex) {
+  var image = images[imageIndex];
+  return image.title;
 }

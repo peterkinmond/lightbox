@@ -39,6 +39,31 @@
 
 .lightbox-image {
   height: 100%;
+  width: auto;
+}
+
+.lightbox-header {
+  height: 30px;
+  background-color: white;
+  top: 0px;
+  position: relative;
+}
+
+.lightbox-title {
+  font-family: sans-serif;
+  position: absolute;
+  top: 5px;
+  left: 10px;
+  right: 35px;
+}
+
+.lightbox-exit {
+  font-family: sans-serif;
+  font-size: x-large;
+  position: absolute;
+  top: 0px;
+  right: 10px;
+  cursor: pointer;
 }
 
 .lightbox .prev-arrow, .next-arrow {
