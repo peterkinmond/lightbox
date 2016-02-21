@@ -40,3 +40,38 @@
 .lightbox-image {
   height: 100%;
 }
+
+.lightbox .prev-arrow, .next-arrow {
+  position: absolute;
+  cursor: pointer;
+  color: white;
+  top: 50%;
+  transform: translateY(-50%);
+  -webkit-transform: translateY(-50%);
+  background-color: rgba(0, 0, 0, 0.5);
+  font-size: larger;
+  padding: 5px 10px;
+  border-radius: 6px;
+  opacity: 0.6;
+}
+
+.lightbox .prev-arrow {
+  left: 10px;
+}
+
+.lightbox .next-arrow {
+  right: 10px;
+}
+
+.lightbox .prev-arrow:hover, .next-arrow:hover {
+  opacity: 1;
+}
+
+.lightbox .prev-arrow:before {
+  content: "<";
+}
+
+.lightbox .next-arrow:after {
+  content: ">";
+}
+
