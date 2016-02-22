@@ -7,7 +7,8 @@ var images = [], // Array of all images shown in grid
   nextArrow = document.getElementsByClassName('next-arrow')[0],
   lightboxExit = document.getElementsByClassName('lightbox-exit')[0],
   lightboxImage = document.getElementsByClassName('lightbox-image')[0],
-  lightboxBackground = document.getElementsByClassName('lightbox-background')[0];
+  lightboxBackground = document.getElementsByClassName('lightbox-background')[0],
+  loadingGif = document.getElementsByClassName('loading')[0];
 
 setupEventListeners();
 callImageApi();  
@@ -39,6 +40,8 @@ function displayImages() {
     imageContainer.dataset.index = index;
     imagesDiv.appendChild(imageContainer);
   });
+
+  loadingGif.style.display = "none";
 }
 
 function loadPrevImage() {
@@ -50,6 +53,7 @@ function loadNextImage() {
 }
 
 function loadLightbox(index) {
+  loadingGif.style.display = "block";
   currentImageIndex = index;
   lightboxBackground.style.display = "block";
 
@@ -74,6 +78,7 @@ function loadLightboxImage() {
   prevArrow.style.display = (currentImageIndex > 0) ? "block" : "none";
   nextArrow.style.display = (currentImageIndex < images.length - 1) ? "block" : "none";
   imageTitle.innerHTML = getImageTitle();
+  loadingGif.style.display = "none";
 }
 
 function closeLightbox() {

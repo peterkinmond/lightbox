@@ -100,3 +100,18 @@
 .lightbox .next-arrow:after {
   content: ">";
 }
+
+.loading {
+  position: absolute;
+  border-radius: 20%;
+  background-image: url("./loading.gif");
+  background-size: cover;
+  background-color: rgba(0, 0, 0, 0.7);
+  width: 125px;
+  height: 125px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -webkit-transform: translate(-50%, -50%);
+  z-index: 11;
+}
