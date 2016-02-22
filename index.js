@@ -1,5 +1,4 @@
-var flickrUrl = "https://api.flickr.com/services/rest/?method=flickr.photosets.getPhotos&api_key=02463078aaf5cf079bb47c1745a278f2&photoset_id=72157647299892609&user_id=41497208%40N04&per_page=20&page=1&media=photos&format=json&nojsoncallback=1",
-  images = [], // Array of all images shown in grid
+var images = [], // Array of all images shown in grid
   currentImageIndex = 0, // Index of image in lightbox
   imagesDiv = document.getElementById('images'),
   lightbox = document.getElementsByClassName('lightbox')[0],
@@ -11,7 +10,7 @@ var flickrUrl = "https://api.flickr.com/services/rest/?method=flickr.photosets.g
   lightboxBackground = document.getElementsByClassName('lightbox-background')[0];
 
 setupEventListeners();
-callImageApi(flickrUrl);  
+callImageApi();  
 
 function setupEventListeners() {
   prevArrow.addEventListener('click', loadPrevImage, false);
@@ -20,10 +19,11 @@ function setupEventListeners() {
   lightboxExit.addEventListener('click', closeLightbox, false);
 }
 
-function callImageApi(url) {
+function callImageApi() {
+  var flickrUrl = "https://api.flickr.com/services/rest/?method=flickr.photosets.getPhotos&api_key=02463078aaf5cf079bb47c1745a278f2&photoset_id=72157647299892609&user_id=41497208%40N04&per_page=20&page=1&media=photos&format=json&nojsoncallback=1";
   var xhr = new XMLHttpRequest();
   xhr.addEventListener("load", displayImages, false);
-  xhr.open('GET', url, true);
+  xhr.open('GET', flickrUrl, true);
   xhr.send();
 }
 
@@ -51,13 +51,29 @@ function loadNextImage() {
 
 function loadLightbox(index) {
   currentImageIndex = index;
-  lightbox.style.display = "block";
   lightboxBackground.style.display = "block";
-  lightboxImage.src = getImageUrl(index, false);
 
-  prevArrow.style.display = (index > 0) ? "block" : "none";
-  nextArrow.style.display = (index < images.length - 1) ? "block" : "none";
-  imageTitle.innerHTML = getImageTitle(index);
+  var img = new Image();
+  img.addEventListener('load', loadLightboxImage, false);
+  img.src = getImageUrl(index, false);
+}
+
+function loadLightboxImage() { 
+  // Check image/window dimensions to size image correctly
+  var imageRatio = this.width/this.height;
+  var windowRatio = window.innerWidth/window.innerHeight;
+  var widthIsLarger = imageRatio > windowRatio;
+
+  lightbox.style.height = widthIsLarger ? "auto" : "80%";
+  lightbox.style.width  = widthIsLarger ? "80%"  : "auto";
+  lightboxImage.style.height = widthIsLarger ? "auto" : "100%";
+  lightboxImage.style.width  = widthIsLarger ? "100%" : "auto";
+  lightbox.style.display = "block";
+  lightboxImage.src = getImageUrl(currentImageIndex, false);
+
+  prevArrow.style.display = (currentImageIndex > 0) ? "block" : "none";
+  nextArrow.style.display = (currentImageIndex < images.length - 1) ? "block" : "none";
+  imageTitle.innerHTML = getImageTitle();
 }
 
 function closeLightbox() {
@@ -74,7 +90,7 @@ function getImageUrl(imageIndex, useThumbnailVersion) {
     ".staticflickr.com/" + image.server + "/" + image.id + "_" + image.secret + "_" + size + ".jpg";
 }
 
-function getImageTitle(imageIndex) {
-  var image = images[imageIndex];
+function getImageTitle() {
+  var image = images[currentImageIndex];
   return image.title;
 }
