@@ -57,12 +57,14 @@
 }
 
 .lightbox-exit {
-  font-family: sans-serif;
-  font-size: x-large;
   position: absolute;
-  top: 0px;
-  right: 10px;
+  top: 5px;
+  right: 5px;
   cursor: pointer;
+  background-image: url("./close.png");
+  background-size: cover;
+  width: 20px;
+  height: 20px;
 }
 
 .lightbox .prev-arrow, .next-arrow {
@@ -98,4 +100,3 @@
 .lightbox .next-arrow:after {
   content: ">";
 }
-
