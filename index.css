@@ -42,11 +42,15 @@
   width: auto;
 }
 
-.lightbox-header {
+.lightbox-footer {
   height: 30px;
+  width: 100%;
   background-color: white;
-  top: 0px;
-  position: relative;
+  bottom: 0px;
+  left: 0px;
+  position: absolute;
+  z-index: 11;
+  display: none
 }
 
 .lightbox-title {

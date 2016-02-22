@@ -8,7 +8,8 @@ var images = [], // Array of all images shown in grid
   lightboxExit = document.getElementsByClassName('lightbox-exit')[0],
   lightboxImage = document.getElementsByClassName('lightbox-image')[0],
   lightboxBackground = document.getElementsByClassName('lightbox-background')[0],
-  loadingGif = document.getElementsByClassName('loading')[0];
+  loadingGif = document.getElementsByClassName('loading')[0],
+  lightboxFooter = document.getElementsByClassName('lightbox-footer')[0];
 
 setupEventListeners();
 callImageApi();  
@@ -22,7 +23,6 @@ function setupEventListeners() {
 
 function callImageApi() {
   var flickrUrl = "https://api.flickr.com/services/rest/?method=flickr.photosets.getPhotos&api_key=02463078aaf5cf079bb47c1745a278f2&photoset_id=72157647923665573&user_id=99265791%40N00&per_page=20&page=1&media=photos&format=json&nojsoncallback=1";
-  //var flickrUrl = "https://api.flickr.com/services/rest/?method=flickr.photosets.getPhotos&api_key=11e2eafb0649a6c1af8f525592e6bd75&photoset_id=72157647923665573&user_id=99265791%40N00&per_page=20&page=1&media=photos&format=json&nojsoncallback=1";
   var xhr = new XMLHttpRequest();
   xhr.addEventListener("load", displayImages, false);
   xhr.open('GET', flickrUrl, true);
@@ -73,8 +73,9 @@ function loadLightboxImage() {
   lightbox.style.width  = widthIsLarger ? "80%"  : "auto";
   lightboxImage.style.height = widthIsLarger ? "auto" : "100%";
   lightboxImage.style.width  = widthIsLarger ? "100%" : "auto";
-  lightbox.style.display = "block";
   lightboxImage.src = getImageUrl(currentImageIndex, false);
+  lightbox.style.display = "block";
+  lightboxFooter.style.display = "block";
 
   prevArrow.style.display = (currentImageIndex > 0) ? "block" : "none";
   nextArrow.style.display = (currentImageIndex < images.length - 1) ? "block" : "none";
@@ -85,6 +86,7 @@ function loadLightboxImage() {
 function closeLightbox() {
   lightbox.style.display = "none";
   lightboxBackground.style.display = "none";
+  lightboxFooter.style.display = "none";
 }
 
 function getImageUrl(imageIndex, useThumbnailVersion) {
