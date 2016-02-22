@@ -21,7 +21,8 @@ function setupEventListeners() {
 }
 
 function callImageApi() {
-  var flickrUrl = "https://api.flickr.com/services/rest/?method=flickr.photosets.getPhotos&api_key=02463078aaf5cf079bb47c1745a278f2&photoset_id=72157647299892609&user_id=41497208%40N04&per_page=20&page=1&media=photos&format=json&nojsoncallback=1";
+  var flickrUrl = "https://api.flickr.com/services/rest/?method=flickr.photosets.getPhotos&api_key=02463078aaf5cf079bb47c1745a278f2&photoset_id=72157647923665573&user_id=99265791%40N00&per_page=20&page=1&media=photos&format=json&nojsoncallback=1";
+  //var flickrUrl = "https://api.flickr.com/services/rest/?method=flickr.photosets.getPhotos&api_key=11e2eafb0649a6c1af8f525592e6bd75&photoset_id=72157647923665573&user_id=99265791%40N00&per_page=20&page=1&media=photos&format=json&nojsoncallback=1";
   var xhr = new XMLHttpRequest();
   xhr.addEventListener("load", displayImages, false);
   xhr.open('GET', flickrUrl, true);
