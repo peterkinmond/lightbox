@@ -1,15 +1,15 @@
 var images = [], // Array of all images shown in grid
   currentImageIndex = 0, // Index of image in lightbox
-  imagesDiv = document.getElementById('images'),
-  lightbox = document.getElementsByClassName('lightbox')[0],
-  imageTitle = document.getElementsByClassName('lightbox-title')[0],
-  prevArrow = document.getElementsByClassName('prev-arrow')[0],
-  nextArrow = document.getElementsByClassName('next-arrow')[0],
-  lightboxExit = document.getElementsByClassName('lightbox-exit')[0],
-  lightboxImage = document.getElementsByClassName('lightbox-image')[0],
-  lightboxBackground = document.getElementsByClassName('lightbox-background')[0],
-  loadingGif = document.getElementsByClassName('loading')[0],
-  lightboxFooter = document.getElementsByClassName('lightbox-footer')[0];
+  imagesDiv = document.querySelector('#images'),
+  lightbox = document.querySelector('.lightbox'),
+  imageTitle = document.querySelector('.lightbox-title'),
+  prevArrow = document.querySelector('.prev-arrow'),
+  nextArrow = document.querySelector('.next-arrow'),
+  lightboxExit = document.querySelector('.lightbox-exit'),
+  lightboxImage = document.querySelector('.lightbox-image'),
+  lightboxBackground = document.querySelector('.lightbox-background'),
+  loadingGif = document.querySelector('.loading'),
+  lightboxFooter = document.querySelector('.lightbox-footer');
 
 setupEventListeners();
 callImageApi();  
