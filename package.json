@@ -8,6 +8,9 @@
   "engines": {
     "node": "5.4.0"
   },
+  "scripts": {
+    "start": "node my_server.js"
+  },
   "description": "Lightbox and photo gallery written with plain JS and CSS",
   "devDependencies": {},
   "scripts": {
